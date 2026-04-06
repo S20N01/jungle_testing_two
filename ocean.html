@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wander — Azurith Crystal Seas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4/dist/full.min.css" rel="stylesheet"/>
+  <script>tailwind.config = { theme: { extend: {} } }</script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* Ocean-specific plan card image fallback colors */
+    .ocean-page .plan-img-wrap { background: linear-gradient(135deg, #0e3550, #1a6a9a); }
+  </style>
+
+ <!-- 1. Supabase SDK -->
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+ <!-- 2. Config (initializes client) -->
+ <script src="js/config.js" defer></script>
+ <!-- 3. Auth logic -->
+ <script src="js/auth.js" defer></script>
+ <!-- 4. Main logic (cursor, scroll, FAQ, lightbox, inquiry) -->
+ <script src="js/main.js" defer></script>
+ <!-- 5. Bookings logic -->
+ <script src="js/bookings.js" defer></script>
+
+</head>
+<body class="ocean-page">
+
+  <!-- Leaf Cursor -->
+  <div id="leaf-cursor">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+      <path d="M21 3C21 3 14 3 10 7C6 11 6 18 6 18C6 18 9.5 15.5 12.5 14.5C9.5 17.5 8.5 22 8.5 22L10.2 21.2C10.2 21.2 11.2 18 14 15.2C15.1 16.4 15.8 18.2 15.8 22L17.6 21.1C17.6 21.1 18.6 16.2 16.8 12.3C19.8 9.2 21 3 21 3Z" fill="#7ab8d4"/>
+    </svg>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="nav-container">
+    <a href="index.html" class="wander-logo">W^0^nder</a>
+    <div class="nav-links">
+      <a href="about.html"    class="glass-btn hover-link">About</a>
+      <a href="bookings.html" class="glass-btn hover-link" id="bookings-link" style="display:none;">Journeys</a>
+      <span class="user-label glass-btn" id="user-label" style="display:none;"></span>
+      <a href="auth.html"     class="glass-btn hover-link" id="auth-btn">Sign In</a>
+      <a href="index.html"    class="glass-btn forest-switcher hover-link">&#x1F333; Forest</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero-section">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="dest-pill scroll-reveal">Crystal Seas</span>
+      <h1 class="wander-hero-title scroll-reveal delay-1">Wander</h1>
+      <p class="hero-tagline scroll-reveal delay-2">Where the horizon holds no beginning and no end</p>
+      <p class="hero-location scroll-reveal delay-3">Azurith &middot; Maldives, Indian Ocean</p>
+    </div>
+    <div class="scroll-cue">
+      <div class="scroll-line"></div>
+      <span class="scroll-text">Explore</span>
+    </div>
+  </section>
+
+  <!-- DESTINATION INTRODUCTION -->
+<section class="intro-section">
+  <div class="intro-container">
+    <p class="intro-eyebrow">The Invitation</p>
+    <h2 class="intro-title">Where Water Becomes Sky</h2>
+    <div class="intro-content">
+      <p>Azurith exists at the edge of perception — an atoll so remote, so untouched, that the boundary between ocean and horizon dissolves completely. Here, the water is not blue but crystalline, holding a clarity that erases the distinction between above and below. You do not look at the sea; you are suspended within it.</p>
+      <p>This is a place of radical stillness. The waves move with a rhythm older than memory. The stars reflect in water so calm it becomes a mirror to the cosmos. In this vastness, something shifts — the constant pull of urgency softens, and you remember what it means to simply be.</p>
+      <p>Our journeys are crafted to surrender you to this stillness. Led by those who know these waters as home, you will discover not just the reef, but the profound peace that exists when you stop fighting the current and let it carry you.</p>
+    </div>
+  </div>
+</section>
+
+  <!-- Plans Section -->
+  <section class="plans-section">
+    <p class="section-eyebrow scroll-reveal">Choose Your Escape</p>
+    <h2 class="section-title scroll-reveal delay-1">
+      <span class="section-title-shift">Into the Blue</span>
+    </h2>
+
+    <div class="plans-grid">
+
+      <!-- Plan 1: Standard -->
+      <div class="plan-card glass scroll-reveal delay-2">
+        <div class="plan-img-wrap">
+          <img
+            class="plan-img"
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?fit=crop&w=600&q=80"
+            alt="Coastal Drift"
+            loading="lazy"
+            onerror="this.style.background='linear-gradient(135deg,#0a1e2e,#0e3550)';this.style.minHeight='230px'"
+          >
+          <span class="plan-badge badge-standard">Standard</span>
+        </div>
+        <div class="plan-body">
+          <h3 class="plan-name">Coastal Drift</h3>
+          <p class="plan-price">$1,900</p>
+          <p class="plan-duration">5 Days &middot; 4 Nights</p>
+          <ul class="plan-features">
+            <li>Beachfront villa with ocean view</li>
+            <li>Guided snorkeling &amp; reef exploration</li>
+            <li>Kayaking through the lagoon at dusk</li>
+            <li>Sunset dhoni cruise with local crew</li>
+            <li>Fresh seafood dinner on the sand</li>
+          </ul>
+          <button class="book-btn" onclick="bookPlan({
+            name: 'Coastal Drift',
+            price: '$1,900',
+            destination: 'Azurith Crystal Seas, Maldives',
+            duration: '5 Days · 4 Nights',
+            type: 'Standard'
+          })">Book This Journey</button>
+        </div>
+      </div>
+
+      <!-- Plan 2: Premium -->
+      <div class="plan-card glass scroll-reveal delay-3">
+        <div class="plan-img-wrap">
+          <img
+            class="plan-img"
+            src="https://images.unsplash.com/photo-1573790387438-4da905039392?fit=crop&w=600&q=80"
+            alt="Azurith Prestige"
+            loading="lazy"
+            onerror="this.style.background='linear-gradient(135deg,#060d14,#0e3550)';this.style.minHeight='230px'"
+          >
+          <span class="plan-badge badge-premium">Premium</span>
+        </div>
+        <div class="plan-body">
+          <h3 class="plan-name">Azurith Prestige</h3>
+          <p class="plan-price">$11,500</p>
+          <p class="plan-duration">10 Days &middot; 9 Nights</p>
+          <ul class="plan-features">
+            <li>Overwater glass-floor villa, private plunge pool</li>
+            <li>Private yacht charter for island-hopping</li>
+            <li>Deep dive with personal marine biologist</li>
+            <li>Bioluminescent night swim experience</li>
+            <li>Private chef &amp; curated tasting menus nightly</li>
+          </ul>
+          <button class="book-btn" onclick="bookPlan({
+            name: 'Azurith Prestige',
+            price: '$11,500',
+            destination: 'Azurith Crystal Seas, Maldives',
+            duration: '10 Days · 9 Nights',
+            type: 'Premium'
+          })">Book This Journey</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- INQUIRY / REQUEST MODULE -->
+<section id="inquiry" class="inquiry-section">
+  <div class="inquiry-container glass">
+    <p class="section-eyebrow">Begin Your Journey</p>
+    <h2 class="section-title">Request an Itinerary</h2>
+    <p class="inquiry-sub">Share your details and preferred dates. We will prepare a personalized outline for your journey.</p>
+
+    <form id="journey-inquiry-form" autocomplete="off">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="inquiry-label" for="inq-name">Full Name</label>
+          <input id="inq-name" class="inquiry-input" type="text" required placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label class="inquiry-label" for="inq-email">Email Address</label>
+          <input id="inq-email" class="inquiry-input" type="email" required placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label class="inquiry-label" for="inq-plan">Selected Journey</label>
+          <select id="inq-plan" class="inquiry-input" required>
+            <option value="" disabled selected>Choose a plan</option>
+            <option value="Coastal Drift">Coastal Drift (Standard)</option>
+            <option value="Azurith Prestige">Azurith Prestige (Premium)</option>
+            <option value="Azurith Prestige">Custom Plan (Diamond)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="inquiry-label" for="inq-date">Preferred Start Date</label>
+          <input id="inq-date" class="inquiry-input" type="date" required>
+        </div>
+      </div>
+      <div id="inquiry-error" class="inquiry-error"></div>
+      <button type="submit" class="inquiry-submit">Submit Request</button>
+    </form>
+  </div>
+</section>
+
+  <!-- Footer -->
+ <footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <span class="footer-logo">Wander</span>
+      <p class="footer-tagline">Two worlds. One compass.</p>
+    </div>
+    <nav class="footer-nav">
+      <a href="index.html" class="footer-link">Sylvara Forest</a>
+      <a href="ocean.html" class="footer-link">Azurith Ocean</a>
+      <a href="bookings.html" class="footer-link">My Journeys</a>
+      <a href="about.html" class="footer-link">About</a>
+    </nav>
+    <div class="footer-legal">
+      <a href="about.html#privacy" class="footer-link">Privacy Policy</a>
+      <p class="footer-copyright">© 2026 Wander. All rights reserved.</p>
+    </div>
+  </div>
+  <div class="footer-accent-line"></div>
+</footer>
+</body>
+</html>

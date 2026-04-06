@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wander — About</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4/dist/full.min.css" rel="stylesheet"/>
+  <script>tailwind.config = { theme: { extend: {} } }</script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    body {
+      background: linear-gradient(155deg, #080f0b 0%, #060d14 50%, #06111d 100%);
+      min-height: 100vh;
+    }
+
+    .about-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-bottom: 80px;
+    }
+
+    .world-card {
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .world-card-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.75);
+      transition: filter 0.5s ease, transform 0.5s ease;
+    }
+
+    .world-card:hover .world-card-img {
+      filter: brightness(0.9);
+      transform: scale(1.03);
+    }
+
+    .world-card-body {
+      padding: 22px 24px;
+    }
+
+    .world-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 8px;
+    }
+
+    .world-card-desc {
+      font-size: 13px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.45);
+    }
+
+    @media (max-width: 640px) {
+      .about-split { grid-template-columns: 1fr; gap: 24px; }
+    }
+  </style>
+
+ <!-- 1. Supabase SDK -->
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+ <!-- 2. Config (initializes client) -->
+ <script src="js/config.js" defer></script>
+ <!-- 3. Auth logic -->
+ <script src="js/auth.js" defer></script>
+ <!-- 4. Main logic (cursor, scroll, FAQ, lightbox, inquiry) -->
+ <script src="js/main.js" defer></script>
+ <!-- 5. Bookings logic -->
+ <script src="js/bookings.js" defer></script>
+</head>
+<body>
+
+  <!-- Leaf Cursor -->
+  <div id="leaf-cursor">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+      <path d="M21 3C21 3 14 3 10 7C6 11 6 18 6 18C6 18 9.5 15.5 12.5 14.5C9.5 17.5 8.5 22 8.5 22L10.2 21.2C10.2 21.2 11.2 18 14 15.2C15.1 16.4 15.8 18.2 15.8 22L17.6 21.1C17.6 21.1 18.6 16.2 16.8 12.3C19.8 9.2 21 3 21 3Z" fill="#72cc87"/>
+    </svg>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="nav-container scrolled">
+    <a href="index.html" class="wander-logo">Wander</a>
+    <div class="nav-links">
+      <a href="bookings.html" class="glass-btn hover-link" id="bookings-link" style="display:none;">Journeys</a>
+      <span class="user-label" id="user-label" style="display:none;"></span>
+      <a class="glass-btn hover-link" id="auth-btn" href="auth.html">Sign In</a>
+      <a href="index.html" class="glass-btn forest-switcher hover-link">&#x1F333; Forest</a>
+      <a href="ocean.html" class="glass-btn ocean-switcher hover-link">&#x1F30A; Ocean</a>
+    </div>
+  </nav>
+
+  <!-- About Content -->
+  <div class="inner-page default-inner" style="padding-top:120px;padding-bottom:100px;">
+    <div class="about-content">
+
+      <!-- Hero Title -->
+      <h1 class="about-hero-title scroll-reveal">Wander.</h1>
+
+      <!-- Brand Story -->
+      <p class="about-label scroll-reveal">What we are</p>
+      <p class="about-text scroll-reveal delay-1">
+        Wander is not a booking agency. It is an invitation.
+      </p>
+      <p class="about-text scroll-reveal delay-2">
+        We believe travel should be a decision made with intention — not a transaction, but a transformation. The world holds infinite depths, but most of it goes unseen, passed over for the familiar and the convenient. Wander exists to change that.
+      </p>
+      <p class="about-text scroll-reveal delay-3">
+        We have chosen two worlds, stripped of noise, placed before you with honesty. Sylvara, where ancient rainforest exhales in the dark and time moves at the pace of roots. Azurith, where the sea holds a stillness so complete you forget the land ever existed.
+      </p>
+      <p class="about-text scroll-reveal">
+        Two destinations. Two states of being. One compass pointing inward.
+      </p>
+
+      <!-- The Two Worlds -->
+      <div class="about-divider scroll-reveal"></div>
+      <p class="about-label scroll-reveal">The two worlds</p>
+      <div class="about-split">
+        <div class="world-card glass scroll-reveal delay-1">
+          <div style="overflow:hidden;">
+            <img
+              class="world-card-img"
+              src="https://images.unsplash.com/photo-1448375240586-882707db888b?fit=crop&w=600&q=80"
+              alt="Sylvara Rainforest"
+              loading="lazy"
+            >
+          </div>
+          <div class="world-card-body">
+            <p class="world-card-name">Sylvara Rainforest</p>
+            <p class="world-card-desc">
+              Borneo, Southeast Asia. An ancient canopy where the air itself seems alive. Fourteen layers of green between you and the sky. The sound of rain on a thousand leaves. A place that asks nothing of you except your presence.
+            </p>
+          </div>
+        </div>
+        <div class="world-card glass scroll-reveal delay-2">
+          <div style="overflow:hidden;">
+            <img
+              class="world-card-img"
+              src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?fit=crop&w=600&q=80"
+              alt="Azurith Crystal Seas"
+              loading="lazy"
+            >
+          </div>
+          <div class="world-card-body">
+            <p class="world-card-name">Azurith Crystal Seas</p>
+            <p class="world-card-desc">
+              Maldives, Indian Ocean. Water so clear it erases the distinction between above and below. An atoll that sits at the edge of the world. The horizon stretches without end in every direction. Come to be undone.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Philosophy -->
+      <p class="about-label scroll-reveal">Our philosophy</p>
+      <p class="about-text scroll-reveal delay-1">
+        Every plan we offer — Standard and Elite — is built around the same core belief: the most profound experiences are not found in crowded itineraries. They are found in depth. In silence. In places that feel unmanaged by time.
+      </p>
+      <p class="about-text scroll-reveal delay-2">
+        The Standard plans are for the traveller who wants to go somewhere real, unfiltered, immersive. The Elite plans are for those who want to surrender completely — where every detail has been considered, and nothing is left to chance except wonder.
+      </p>
+
+      <!-- Privacy Policy -->
+      <div class="about-divider scroll-reveal" id="privacy"></div>
+      <h2 class="privacy-title scroll-reveal">Privacy Policy</h2>
+
+      <div class="privacy-item scroll-reveal delay-1">
+        <p class="privacy-item-title">What we store</p>
+        <p class="privacy-item-text">
+          Wander stores only what you give us — your username, your password, and the journeys you have chosen to book. Nothing else is collected, inferred, or retained.
+        </p>
+      </div>
+
+      <div class="privacy-item scroll-reveal delay-2">
+        <p class="privacy-item-title">Where it lives</p>
+        <p class="privacy-item-text">
+          All of your data is stored exclusively on your own device using your browser's local storage. We do not transmit, sync, or upload your data to any server. Your information never leaves your machine.
+        </p>
+      </div>
+
+      <div class="privacy-item scroll-reveal delay-3">
+        <p class="privacy-item-title">How we use it</p>
+        <p class="privacy-item-text">
+          Your account information is used solely to identify you across sessions so you can view and cancel your bookings. We do not use your data for advertising, analytics, or any purpose beyond enabling your experience on this site.
+        </p>
+      </div>
+
+      <div class="privacy-item scroll-reveal">
+        <p class="privacy-item-title">Deleting your data</p>
+        <p class="privacy-item-text">
+          You can delete all Wander data at any time by clearing your browser's local storage. Once cleared, your account and all booking history will be permanently removed.
+        </p>
+      </div>
+
+    </div>
+  </div>
+ <!-- this is the faq section-->
+<section class="faq-section">
+  <div class="faq-container">
+    <h2 class="section-title">Everything You Need to Know</h2>
+    <div class="faq-list">
+      
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is included in the journey price?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>All accommodations, guided excursions, meals as specified, local transportation, permits, and 24/7 support. Flights to the region and travel insurance are not included.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What is the cancellation policy?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Full refund if cancelled 60+ days before departure. 50% refund 30–59 days before. No refund within 30 days. We recommend travel insurance for unforeseen circumstances.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Do I need special fitness or experience?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Our standard journeys require moderate fitness (ability to walk 3–5 km on uneven terrain). Premium journeys can be customized for all fitness levels. No prior experience necessary.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What should I pack?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>We provide a detailed packing list upon booking. Essentials include: lightweight breathable clothing, sturdy walking shoes, rain jacket, insect repellent, sunscreen, and a reusable water bottle.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          Are these journeys suitable for solo travelers?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Absolutely. Approximately 40% of our travelers join solo. You will be matched with a roommate of the same gender, or you can opt for a single supplement for private accommodation.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          What about visas and vaccinations?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Visa requirements vary by nationality. We provide guidance upon booking. Recommended vaccinations typically include Hepatitis A/B, Typhoid, and Tetanus. Consult your physician 6–8 weeks before departure.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  <!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <span class="footer-logo">Wander</span>
+      <p class="footer-tagline">Two worlds. One compass.</p>
+    </div>
+    <nav class="footer-nav">
+      <a href="index.html" class="footer-link">Sylvara Forest</a>
+      <a href="ocean.html" class="footer-link">Azurith Ocean</a>
+      <a href="bookings.html" class="footer-link">My Journeys</a>
+      <a href="about.html" class="footer-link">About</a>
+    </nav>
+    <div class="footer-legal">
+      <a href="about.html#privacy" class="footer-link">Privacy Policy</a>
+      <p class="footer-copyright">© 2026 Wander. All rights reserved.</p>
+    </div>
+  </div>
+  <div class="footer-accent-line"></div>
+</footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

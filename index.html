@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Wander into the Sylvara Rainforest. Intentional journeys for deep immersion.">
+    <title>Wander — Sylvara Rainforest</title>
+    <link rel="stylesheet" href="css/style.css">
+
+ <!-- 1. Supabase SDK -->
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+ <!-- 2. Config (initializes client) -->
+ <script src="js/config.js" defer></script>
+ <!-- 3. Auth logic -->
+ <script src="js/auth.js" defer></script>
+ <!-- 4. Main logic (cursor, scroll, FAQ, lightbox, inquiry) -->
+ <script src="js/main.js" defer></script>
+ <!-- 5. Bookings logic -->
+ <script src="js/bookings.js" defer></script>
+
+</head>
+<body class="forest-page">
+    <!-- Custom Cursor -->
+    <div id="leaf-cursor">🌿</div>
+
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <a href="index.html" class="wander-logo">W^0^nder</a>
+        <div class="nav-links">
+            <a href="about.html"    class="glass-btn hover-link">About</a>
+            <a href="bookings.html" id="bookings-link" class="hover-link glass-btn" style="display:none;">Journeys</a>
+            <span id="user-label" class="user-label glass-btn" style="display:none;"></span>
+            <a href="auth.html" id="auth-btn" class="glass-btn">Sign In</a>
+            <a href="ocean.html" class="glass-btn ocean-switcher">🌊 Ocean</a>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="hero-bg"></div>
+            <div class="hero-overlay"></div>
+            <div class="hero-content scroll-reveal">
+                <span class="dest-pill">Ancient Rainforest</span>
+                <h1 class="wander-hero-title">Wander Time</h1>
+                <p class="hero-tagline">Where the canopy breathes and time dissolves</p>
+                <p class="hero-location">Sylvara · Borneo, Southeast Asia</p>
+                <a href="#plans" class="glass-btn" style="margin-top: 24px;">Discover</a>
+            </div>
+            <div class="scroll-cue scroll-reveal delay-2">
+                <div class="scroll-line"></div>
+                <span class="scroll-text">Scroll</span>
+            </div>
+        </section>
+
+<!-- DESTINATION INTRODUCTION -->
+<section class="intro-section">
+  <div class="intro-container">
+    <p class="intro-eyebrow">The Invitation</p>
+    <h2 class="intro-title">Where Roots Meet Sky</h2>
+    <div class="intro-content">
+      <p>Sylvara is not a destination to be conquered. It is a presence to be entered. Here, in one of Earth's last untouched rainforests, time moves at the pace of growth — measured in rings, not hours. The air hums with life you cannot see but always feel. Fourteen distinct canopy layers rise above you, each holding its own ecosystem, its own secrets.</p>
+      <p>This is a place that asks only for your attention. In return, it offers what modern life has forgotten: the profound silence that exists beneath noise, the clarity that comes from being small in something vast, the reminder that you are not separate from nature — you are of it.</p>
+      <p>Our journeys are designed not to show you Sylvara, but to let Sylvara show itself to you. Guided by those who have walked these paths for generations, you will move through the forest not as a visitor, but as a guest.</p>
+    </div>
+  </div>
+</section>
+
+        <!-- Plans Section -->
+        <section id="plans" class="plans-section">
+            <p class="section-eyebrow">Choose Your Path</p>
+            <h2 class="section-title section-title-shift">Into the Green</h2>
+            
+            <div class="plans-grid">
+                <!-- Standard Plan -->
+                <article class="plan-card glass scroll-reveal delay-1">
+                    <div class="plan-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?fit=crop&w=600&q=80" alt="Forest Wanderer lodge" class="plan-img" loading="lazy">
+                        <span class="plan-badge badge-standard">Standard</span>
+                    </div>
+                    <div class="plan-body">
+                        <h3 class="plan-name">Forest Wanderer</h3>
+                        <p class="plan-price">$2,400</p>
+                        <p class="plan-duration">7 Days · 6 Nights</p>
+                        <ul class="plan-features">
+                            <li>Base camp lodge accommodation</li>
+                            <li>Guided jungle trek with naturalist</li>
+                            <li>Canopy walkway at sunrise</li>
+                            <li>Traditional Borneo dinner experience</li>
+                            <li>River boat excursion through the canopy</li>
+                        </ul>
+                        <button class="book-btn" data-plan='{"name":"Forest Wanderer","price":"$2,400","destination":"Sylvara Rainforest","duration":"7 Days · 6 Nights","type":"Standard"}'>Book This Journey</button>
+                    </div>
+                </article>
+
+                <!-- Premium Plan -->
+                <article class="plan-card glass scroll-reveal delay-2">
+                    <div class="plan-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?fit=crop&w=600&q=80" alt="Sylvara Elite treehouse" class="plan-img" loading="lazy">
+                        <span class="plan-badge badge-premium">Premium</span>
+                    </div>
+                    <div class="plan-body">
+                        <h3 class="plan-name">Sylvara Elite</h3>
+                        <p class="plan-price">$12,800</p>
+                        <p class="plan-duration">14 Days · 13 Nights</p>
+                        <ul class="plan-features">
+                            <li>Private luxury treehouse villa with deck</li>
+                            <li>Dedicated personal naturalist guide</li>
+                            <li>Helicopter canopy panorama tour</li>
+                            <li>Botanical spa treatments nightly</li>
+                            <li>Private chef & gourmet dining</li>
+                        </ul>
+                        <button class="book-btn" data-plan='{"name":"Sylvara Elite","price":"$12,800","destination":"Sylvara Rainforest","duration":"14 Days · 13 Nights","type":"Premium"}'>Book This Journey</button>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <!-- INQUIRY / REQUEST MODULE -->
+<section id="inquiry" class="inquiry-section">
+  <div class="inquiry-container glass">
+    <p class="section-eyebrow">Begin Your Journey</p>
+    <h2 class="section-title">Request an Itinerary</h2>
+    <p class="inquiry-sub">Share your details and preferred dates. We will prepare a personalized outline for your journey.</p>
+
+    <form id="journey-inquiry-form" autocomplete="off">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="inquiry-label" for="inq-name">Full Name</label>
+          <input id="inq-name" class="inquiry-input" type="text" required placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label class="inquiry-label" for="inq-email">Email Address</label>
+          <input id="inq-email" class="inquiry-input" type="email" required placeholder="you@example.com">
+        </div>
+        <div class="form-group">
+          <label class="inquiry-label" for="inq-plan">Selected Journey</label>
+          <select id="inq-plan" class="inquiry-input" required>
+            <option value="" disabled selected>Choose a plan</option>
+            <option value="Forest Wanderer">Forest Wanderer (Standard)</option>
+            <option value="Sylvara Elite">Sylvara Elite (Premium)</option>
+            <option value="Sylvara Elite">Custom Plan (Diamond)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="inquiry-label" for="inq-date">Preferred Start Date</label>
+          <input id="inq-date" class="inquiry-input" type="date" required>
+        </div>
+      </div>
+      <div id="inquiry-error" class="inquiry-error"></div>
+      <button type="submit" class="inquiry-submit">Submit Request</button>
+    </form>
+  </div>
+</section>
+    </main>
+
+    <!-- Footer -->
+   <footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <span class="footer-logo">Wander</span>
+      <p class="footer-tagline">Two worlds. One compass.</p>
+    </div>
+    <nav class="footer-nav">
+      <a href="index.html" class="footer-link">Sylvara Forest</a>
+      <a href="ocean.html" class="footer-link">Azurith Ocean</a>
+      <a href="bookings.html" class="footer-link">My Journeys</a>
+      <a href="about.html" class="footer-link">About</a>
+    </nav>
+    <div class="footer-legal">
+      <a href="about.html#privacy" class="footer-link">Privacy Policy</a>
+      <p class="footer-copyright">© 2026 Wander. All rights reserved.</p>
+    </div>
+  </div>
+  <div class="footer-accent-line"></div>
+</footer>
+</body>
+</html>
