@@ -435,3 +435,201 @@ body::before {
   .plan-card:hover .plan-img { transform: none; }
   .glass-btn:active, .book-btn:active, .auth-submit:active, .cancel-btn:active, .inquiry-submit:active { transform: scale(0.97); transition-duration: 0.1s; }
 }
+
+/* ===== HOVER-REVEAL FAQ (CSS ONLY) ===== */
+.faq-hover-item {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+.faq-hover-item:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.07);
+}
+.faq-hover-q {
+  padding: 20px 24px;
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  cursor: default;
+  position: relative;
+}
+.faq-hover-q::after {
+  content: '→';
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.4;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.faq-hover-item:hover .faq-hover-q::after {
+  opacity: 0.8;
+  transform: translateY(-50%) translateX(4px);
+}
+.faq-hover-a {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 24px;
+  opacity: 0;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              padding 0.4s ease, 
+              opacity 0.3s ease;
+}
+.faq-hover-a p {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.6);
+}
+.faq-hover-item:hover .faq-hover-a {
+  max-height: 300px;
+  padding: 0 24px 20px;
+  opacity: 1;
+}
+
+/* Touch Device Fallback: Answers always visible */
+@media (hover: none) and (pointer: coarse) {
+  .faq-hover-a {
+    max-height: 300px !important;
+    padding: 0 24px 20px !important;
+    opacity: 1 !important;
+  }
+  .faq-hover-q::after {
+    content: '↓';
+    opacity: 0.5;
+    transform: translateY(-50%);
+  }
+}
+
+/* ===== LOADER OVERLAY (Updated) ===== */
+.wander-loader {
+  position: fixed; inset: 0; z-index: 10001;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: inherit;
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
+}
+.wander-loader.hide { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.loader-leaf {
+  width: 54px; height: 54px; color: rgba(255, 255, 255, 0.72);
+  animation: leaf-sway 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  transform-origin: 50% 100%; will-change: transform;
+}
+
+.loader-text {
+  margin-top: 18px; font-family: 'Cormorant Garamond', serif;
+  font-size: 13px; font-weight: 300; letter-spacing: 0.45em;
+  color: rgba(255, 255, 255, 0.42); animation: loader-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes leaf-sway {
+  0%, 100% { transform: translateY(0) rotate(-5deg) scale(1); }
+  50% { transform: translateY(-6px) rotate(5deg) scale(1.03); }
+}
+@keyframes loader-pulse {
+  0%, 100% { opacity: 0.32; } 50% { opacity: 0.78; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wander-loader { display: none !important; }
+}
+
+/* ===== DESTINATION MARQUEE SECTION ===== */
+.dest-marquee-section {
+  padding: 60px 0 80px;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+.forest-page .dest-marquee-section { background: linear-gradient(180deg, var(--forest-darkest) 0%, var(--forest-dark) 100%); }
+.ocean-page .dest-marquee-section { background: linear-gradient(180deg, var(--ocean-darkest) 0%, var(--ocean-dark) 100%); }
+
+.dest-marquee-container {
+  position: relative; width: 100%; overflow: hidden; padding: 24px 0;
+}
+/* Premium edge fades (explicit dark overlay prevents cross-theme rendering bugs) */
+.dest-marquee-container::before, .dest-marquee-container::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 140px; z-index: 3; pointer-events: none;
+}
+.dest-marquee-container::before { left: 0; background: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, transparent 100%); }
+.dest-marquee-container::after { right: 0; background: linear-gradient(270deg, rgba(0,0,0,0.85) 0%, transparent 100%); }
+
+.dest-marquee-track {
+  display: flex; gap: 24px; width: max-content;
+  animation: marquee-scroll 42s linear infinite;
+  will-change: transform;
+}
+/* Hover pause: halts animation immediately, resumes from exact coordinate on mouseleave */
+.dest-marquee-container:hover .dest-marquee-track { animation-play-state: paused; }
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* Mathematical snap point for seamless infinite loop */
+}
+
+/* ===== MODERN MARQUEE CARD ===== */
+.dest-card {
+  width: 340px; flex-shrink: 0; border-radius: 18px; overflow: hidden; position: relative;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  transition: transform 0.45s cubic-bezier(0.4,0,0.2,1), box-shadow 0.45s ease, border-color 0.45s ease;
+  cursor: pointer;
+}
+.dest-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 28px 64px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.25);
+}
+
+.dest-card-img { width: 100%; height: 240px; object-fit: cover; display: block; transition: transform 0.6s ease; }
+.dest-card:hover .dest-card-img { transform: scale(1.05); }
+
+.dest-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+.dest-card-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 22px; }
+
+.dest-continent {
+  display: inline-block; font-size: 9px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 5px 10px; border-radius: 100px; background: var(--tag-bg); border: 1px solid currentColor;
+  margin-bottom: 10px; transition: background 0.3s ease;
+}
+.dest-card:hover .dest-continent { background: rgba(255,255,255,0.15); }
+
+.dest-name {
+  font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: #fff; margin-bottom: 4px;
+  line-height: 1.15;
+}
+.dest-price {
+  font-size: 13px; font-weight: 300; color: rgba(255,255,255,0.7); letter-spacing: 0.04em;
+}
+
+/* ===== RESPONSIVE & ACCESSIBILITY ===== */
+@media (max-width: 1024px) { 
+  .dest-card { width: 300px; } 
+  .dest-card-img { height: 210px; } 
+}
+@media (max-width: 768px) {
+  .dest-card { width: 280px; }
+  .dest-marquee-container::before, .dest-marquee-container::after { width: 60px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dest-marquee-track { animation-duration: 0.01ms !important; }
+}
+
+/* ===== 4-CARD PLAN GRID OVERRIDE ===== */
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+@media (max-width: 900px) { .plans-grid { grid-template-columns: 1fr; } }

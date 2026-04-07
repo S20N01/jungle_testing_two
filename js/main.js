@@ -1,4 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+  // ===== LOADER CONTROL =====
+ const loader = document.getElementById('wander-loader');
+ if (loader) {
+   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+   const displayTime = reducedMotion ? 50 : 2000; // 50ms bypass for accessibility
+  
+   setTimeout(() => {
+     loader.classList.add('hide');
+     // Remove from DOM after transition completes to free memory
+     setTimeout(() => { if (loader.parentNode) loader.remove(); }, 650);
+   }, displayTime);
+ }
+
   // ===== TOAST UTILITY =====
   window.showToast = (msg) => {
     const existing = document.querySelector('.wander-toast');
@@ -148,4 +162,26 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!error) inquiryForm.reset();
     });
   }
+
+    // ===== PLAN BOOKING DELEGATION (For 4-Card Grid) =====
+  // Binds .book-btn clicks to the global bookPlan() function from bookings.js
+  document.addEventListener('click', e => {
+    const btn = e.target.closest('.book-btn');
+    if (!btn) return;
+    
+    try {
+      const plan = JSON.parse(btn.dataset.plan);
+      // Verify bookPlan exists globally (exported from bookings.js)
+      if (typeof window.bookPlan === 'function') {
+        window.bookPlan(plan);
+      } else {
+        console.error('bookPlan function not found. Ensure bookings.js loads before main.js.');
+      }
+    } catch (err) {
+      console.error('Invalid plan data on button:', btn.dataset.plan, err);
+      if (typeof window.showToast === 'function') {
+        window.showToast('Unable to process this journey. Please try again.');
+      }
+    }
+  });
 });
